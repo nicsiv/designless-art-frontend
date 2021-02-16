@@ -1,0 +1,189 @@
+/* Default CSS */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth; /* this enables smooth scrolling between internal links */
+  }
+
+  img {
+    max-width: 100%; /* this ensures images never break their container */
+    height: auto;
+  }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+    color: black;
+  }
+
+[class*=grid] {   margin: 0;  }
+[class*=col]  {   padding: 0; }
+
+  .left     {  text-align: left;     }
+  .right    {  text-align: right;    }
+  .centered {  text-align: center;   }
+
+  .padded   {  padding: 5%;    }
+  .padded-1 {  padding: 1rem;  }
+  .padded-2 {  padding: 2rem;  }
+
+  /* General Typography */
+
+ h2, h4, h5, h6 {
+    line-height: 1;
+    margin-bottom: 0.8rem;
+    color: #404740;
+    font-family: 'Abril Fatface', cursive;
+  }
+  h3 {
+    color: white;
+    font-family: 'Abril Fatface', cursive;
+  }
+  .names {
+    color: #404740;
+  }
+
+  .logo {
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    color: #404740;
+    display: inline;
+    font-weight: 400;
+  }
+
+  h2  { font-size: 3.2rem;  }
+  h3  { font-size: 1.8rem;  }
+  h4  { font-size: 16px;  }
+  p   { font-size: 1.2rem; }
+
+  p, ul {
+     margin-bottom: 0.8rem;
+  }
+  p.emphasis {   /* typically added to paragraphs to make them a little bigger, could be a different font or color also */
+    font-size: 22px;
+  }
+
+  .big-bold {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: left;
+  }
+  .light-bg     {  background-color: #fff4ea;  }
+  .light-text   { color: white; }
+
+  /* Header */
+header.grid-header {
+
+    padding: 2% 5%;
+    z-index: 1;
+    
+  }
+
+  header a,
+  footer a,
+  nav a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 400;
+  }
+
+  header nav a,
+  .inline a {
+    display: inline-block;
+    padding: 0.5rem;
+  }
+  nav a:hover {
+    color: #799979;
+  }
+
+  header nav a.emphasis {
+    /* padding: 0.5rem 2rem; */
+    margin: 0 0.5rem;
+    border: 1px solid #799979;
+    border-radius: 2px;
+    color: #799979;
+  }
+
+  header nav a.emphasis:hover {
+    background-color: #799979;
+    color: white;
+  }
+
+  .banner-text {
+    color: white;
+    font-size: 80px;
+    padding-left: 3rem;
+    font-family: 'Abril Fatface', cursive;
+  }
+
+  .banner-button {
+    margin-left: 17rem;
+  }
+
+  
+
+  
+
+#col-1 {
+  /* position: fixed; */
+  width: 25%;
+  float: left;
+  height: 100%;
+  background-color: #FFEFD5;
+  z-index: 1010101010
+}
+
+#col-2 {
+  /* position: fixed; */
+  width: 75%;
+  float: right;
+  height: 100%;
+  background-color: white;
+  z-index: 1010101010
+}
+
+
+
+  
+ 
+
+  /* Split the screen in half 
+/* .split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  } */
+  
+  /* Control the left side */
+   /* .left {
+    left: 0;
+    background-color: #F5DEB3;
+  } 
+   */
+  /* Control the right side */
+   /* .right {
+    right: 0;
+    background-color: white;
+  } 
+   */
+  /* If you want the content centered horizontally and vertically */
+   /* .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }  */
+  
+  /* Style the image inside the centered container, if needed */
+   /* .centered img {
+    width: 150px;
+    border-radius: 50%;
+  } */
