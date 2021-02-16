@@ -1,20 +1,20 @@
 let polySynth
 
+let width = this.innerWidth * .70
+let height = this.innerHeight * .80
+
 function setup() {
-    frameRate(2)
-    let cnv = createCanvas(this.innerWidth-20, this.innerHeight-140)
+    frameRate(1)
     
-    sound = new p5.PolySynth();
-    cnv.mousePressed(playSynth);
-    
+    let cnv = createCanvas(width, height)
+    cnv.parent('#col-2')
+    // sound = new p5.PolySynth();
+    // cnv.mousePressed(playSynth); 
 }
 
 function draw() {
     console.log('mouseposition:' + mouseX + ',' + mouseY);
     background(12, 12);
-    
-    let width = this.innerWidth
-    let height = this.innerHeight
       
     let e = Math.ceil(Math.random() * 100)
     let f = Math.ceil(Math.random() * 100)
