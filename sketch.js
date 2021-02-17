@@ -20,9 +20,7 @@ function draw() {
     if (mouseIsPressed) {
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
-    // if (mousePressed){
-    //     shapeShift()
-    // }
+
 }
 
 function shapeShift(){

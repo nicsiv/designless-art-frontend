@@ -59,8 +59,24 @@ saveButton.className = 'save'
 saveButton.innerText = 'save'
 div.append(saveButton)
 saveButton.addEventListener('click', event => {
-    let easel = window.canvas.toDataURL('png')
-    
+    canvas.toBlob(function(blob) {
+        var newImg = document.createElement('img'),
+            url = URL.createObjectURL(blob);
+      
+        newImg.onload = function() {
+          // no longer need to read the blob so it's revoked
+          URL.revokeObjectURL(url);
+        };
+      
+        newImg.src = url;
+        let div = document.querySelector('#myDropdown')
+        div.appendChild(newImg);
+        debugger
+      })
+
+  
+
+
     newEasel = {
         image: easel,
         user_id: userId,
