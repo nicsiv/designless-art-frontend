@@ -1,7 +1,7 @@
 let userId = 1
 let userIndex = 1
 let width = this.innerWidth
-let height = this.innerHeight * .80
+let height = this.innerHeight
 
 function setup() {
     frameRate(1)
@@ -14,7 +14,7 @@ function setup() {
 
 function draw() {
     console.log('mouseposition:' + mouseX + ',' + mouseY);
-    background(12, 12);
+    background(0);
     
     stroke(255);
     if (mouseIsPressed) {
