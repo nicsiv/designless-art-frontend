@@ -71,7 +71,10 @@ function shapeShift(){
 function saveThisCanvas(){
     let newCanvasName = `${userId}/${++userIndex}`
     saveCanvas(newCanvasName, 'png')
-    let newCanvas = {canvas: newCanvasName}
+    let newCanvas = {
+        user_id: userId,
+        image: newCanvasName
+    }
 
     reqObj = {
         method: 'POST',
@@ -84,14 +87,12 @@ function saveThisCanvas(){
 }
 
 function addCanvasToApi(reqObj){
-    fetch(`http://localhost:3000/${userId}`, reqObj)
+    fetch('http://localhost:3000/easels', reqObj)
     .then(resp => resp.json())
     .then(canvas => {
         console.log(canvas)
         debugger
     })
-
-
 }
 
 function createButtons(){
@@ -117,7 +118,6 @@ function createButtons(){
     rectangleBtn = createButton('Rectangle')
     rectangleBtn.position(5, 500)
     // rectangleBtn.mousePressed(shapeOf('rectangle'))
-
 }
 
 
