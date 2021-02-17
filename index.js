@@ -2,8 +2,10 @@
 const main = () => {
     showFormListener()
     formListener()
-   
+    saveEasel()
 }
+
+
 
 document.getElementById('id01').style.display='none'
 // document.getElementById('id02').style.display='none'
@@ -29,6 +31,7 @@ const formListener = () => {
                 username: e.target.firstElementChild.children[1].value,
                 // password_digest: e.target.firstElementChild.children[3].value 
             }
+            event.target.reset()
 
             const reqObj = {
                 method: 'POST',
@@ -47,10 +50,27 @@ const formListener = () => {
                       })     
         }
     })
-    
 }
 
+let dropdownDisplay = false
+const dropDown = document.querySelector('#myDropdown')
+dropDown.style.display = 'none'
+const button = document.querySelector('.dropbtn')
+button.addEventListener('click', event => {
+	dropdownDisplay = !dropdownDisplay
+       if (dropdownDisplay) {
+		dropDown.style.display = 'block'	
+	} else {
+		dropDown.style.display = 'none'
+	}
+})
 
+function saveEasel(){
+let saveEaselBtn = document.querySelectorAll('button')[2]
+saveEaselBtn.addEventListener('click', event => {
+    console.log(event.target)
+})
+}
 
 
 main()
