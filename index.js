@@ -4,7 +4,6 @@ const main = () => {
     formListener()
 }
 
-
 document.getElementById('id01').style.display='none'
 document.getElementById('id02').style.display='none'
 let formButton = document.querySelector('.form-button')
@@ -20,11 +19,9 @@ function showFormListener(){
     })
 }
 
-
 const formListener = () => {
     const form = document.querySelector('form')
     form.addEventListener('submit', function(e){
-        debugger
         if (e.target.id === "login form") {
             const newLogin = {
                 username: e.target.firstElementChild.children[1].value,
@@ -32,22 +29,8 @@ const formListener = () => {
             }
         }
     })
-
-    
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 main()
 

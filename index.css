@@ -143,10 +143,6 @@ header.grid-header {
     margin-left: 17rem;
   }
 
-  
-
-  
-
 #col-1 {
   /* position: fixed; */
   width: 10%;
@@ -164,11 +160,6 @@ header.grid-header {
   background-color: white;
   z-index: 1010101010
 }
-
-
-
-  
- 
 
   /* Split the screen in half 
 /* .split {
@@ -209,6 +200,7 @@ header.grid-header {
 
 
   /* login form */
+  
   {box-sizing: border-box;}
 
 /* Button used to open the contact form - fixed at the bottom of the page */

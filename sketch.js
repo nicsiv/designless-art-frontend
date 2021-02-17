@@ -93,8 +93,6 @@ function addCanvasToApi(reqObj){
         console.log(canvas)
         debugger
     })
-
-
 }
 
 function createButtons(){
@@ -120,7 +118,6 @@ function createButtons(){
     rectangleBtn = createButton('Rectangle')
     rectangleBtn.position(5, 500)
     // rectangleBtn.mousePressed(shapeOf('rectangle'))
-
 }
 
 
