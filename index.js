@@ -32,6 +32,11 @@ const formListener = () => {
     
 }
 
+const newLoginListener = () => {
+    fetch('http://localhost:3000/users', newLogin)
+    .then(resp => resp.json())
+    .then(loginInfo => )
+}
 main()
 
 
