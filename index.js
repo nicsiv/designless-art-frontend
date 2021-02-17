@@ -52,6 +52,35 @@ const formListener = () => {
     })
 }
 
+<<<<<<< HEAD
+
+let div = document.querySelector('#col-1')
+const saveButton = document.createElement('button')
+saveButton.className = 'save'
+saveButton.innerText = 'save'
+div.append(saveButton)
+saveButton.addEventListener('click', event => {
+    let easel = window.canvas.toDataURL('image/jpeg')
+    newEasel = {
+        image: easel,
+        user_id: userId,
+    }
+    let reqObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newEasel)
+    }
+    fetch('http://localhost:3000/easels', reqObj)
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data)
+    })
+})
+
+
+=======
 let dropdownDisplay = false
 const dropDown = document.querySelector('#myDropdown')
 dropDown.style.display = 'none'
@@ -71,6 +100,7 @@ saveEaselBtn.addEventListener('click', event => {
     console.log(event.target)
 })
 }
+>>>>>>> 5f15c8d9bb17aba87f6aa6158bb738818f50cb4b
 
 
 main()
