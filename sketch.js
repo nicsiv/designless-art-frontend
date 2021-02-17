@@ -98,7 +98,8 @@ function addCanvasToApi(reqObj){
 function createButtons(){
     saveBtn = createButton("Save Canvas"); 
     saveBtn.position(5, 250) 
-    saveBtn.mousePressed(saveThisCanvas); 
+    saveBtn.mousePressed(saveThisCanvas);
+     
 
     btn = createButton("Change Shape"); 
     btn.position(5, 300) 
