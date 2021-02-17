@@ -1,11 +1,14 @@
+let dropdownDisplay = false
+const dropDown = document.querySelector('#myDropdown')
+dropDown.style.display = 'none'
 
 const main = () => {
+
     showFormListener()
     formListener()
     saveEasel()
+    createButtonListener()
 }
-
-
 
 document.getElementById('id01').style.display='none'
 // document.getElementById('id02').style.display='none'
@@ -29,9 +32,8 @@ const formListener = () => {
             e.preventDefault()
             const newLogin = {
                 username: e.target.firstElementChild.children[1].value,
-                // password_digest: e.target.firstElementChild.children[3].value 
             }
-            event.target.reset()
+            e.target.reset()
 
             const reqObj = {
                 method: 'POST',
@@ -44,27 +46,27 @@ const formListener = () => {
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
                 .then(users => {
-                    //   users.forEach(user => {
-                          console.log(users)
-                          
-                      })     
+                    console.log(users)
+                })     
         }
     })
 }
 
 
+//create function
 let div = document.querySelector('#col-1')
 const saveButton = document.createElement('button')
 saveButton.className = 'save'
 saveButton.innerText = 'save'
 div.append(saveButton)
+
+//create function/listener
 saveButton.addEventListener('click', event => {
     canvas.toBlob(function(blob) {
-        var newImg = document.createElement('img'),
+        let newImg = document.createElement('img'),
             url = URL.createObjectURL(blob);
       
         newImg.onload = function() {
-          // no longer need to read the blob so it's revoked
           URL.revokeObjectURL(url);
         };
       
@@ -73,9 +75,6 @@ saveButton.addEventListener('click', event => {
         div.appendChild(newImg);
         debugger
       })
-
-  
-
 
     newEasel = {
         image: easel,
@@ -96,18 +95,17 @@ saveButton.addEventListener('click', event => {
 })
 
 
-let dropdownDisplay = false
-const dropDown = document.querySelector('#myDropdown')
-dropDown.style.display = 'none'
-const button = document.querySelector('.dropbtn')
-button.addEventListener('click', event => {
-	dropdownDisplay = !dropdownDisplay
-       if (dropdownDisplay) {
-		dropDown.style.display = 'block'	
-	} else {
-		dropDown.style.display = 'none'
-	}
-})
+function createButtonListener(){
+    const button = document.querySelector('.dropbtn')
+    button.addEventListener('click', event => {
+        dropdownDisplay = !dropdownDisplay
+        if (dropdownDisplay) {
+            dropDown.style.display = 'block'	
+        } else {
+            dropDown.style.display = 'none'
+        }
+    })
+}
 
 function saveEasel(){
 let saveEaselBtn = document.querySelectorAll('button')[2]
