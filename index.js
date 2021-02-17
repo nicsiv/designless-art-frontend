@@ -2,10 +2,11 @@
 const main = () => {
     showFormListener()
     formListener()
+   
 }
 
 document.getElementById('id01').style.display='none'
-document.getElementById('id02').style.display='none'
+// document.getElementById('id02').style.display='none'
 let formButton = document.querySelector('.form-button')
 
 function showFormListener(){
@@ -23,20 +24,35 @@ const formListener = () => {
     const form = document.querySelector('form')
     form.addEventListener('submit', function(e){
         if (e.target.id === "login form") {
+            e.preventDefault()
             const newLogin = {
                 username: e.target.firstElementChild.children[1].value,
-                password_digest: e.target.firstElementChild.children[3].value
+                // password_digest: e.target.firstElementChild.children[3].value 
             }
+
+            const reqObj = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newLogin)
+              }
+
+                fetch('http://localhost:3000/users/auth', reqObj)
+                .then(resp => resp.json())
+                .then(users => {
+                    //   users.forEach(user => {
+                          console.log(users)
+                          
+                      })     
         }
     })
     
 }
 
-const newLoginListener = () => {
-    fetch('http://localhost:3000/users', newLogin)
-    .then(resp => resp.json())
-    .then(loginInfo => )
-}
+
+
+
 main()
 
 
