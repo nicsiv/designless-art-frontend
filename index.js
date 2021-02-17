@@ -1,28 +1,59 @@
-//login
 
-// import createAuth0Client from '@auth0/auth0-spa-js';
-
-// const auth0 = await createAuth0Client({
-//   domain: 'http://localhost:3000/users',
-//   client_id: 'YOUR_CLIENT_ID'
-// });
-
-
-
-
-// function fetchUsers(){
-//     fetch("http://localhost:3000/users")
-//     .then( res => res.json() )
-//     .then( userInfo => {
-//         console.log(userInfo)
-//     })
-// }
-
-
-
-function sayHello(){
-    console.log("your app is working!")
+const main = () => {
+    showFormListener()
+    formListener()
 }
 
-sayHello()
-// fetchUsers()
+
+document.getElementById('id01').style.display='none'
+document.getElementById('id02').style.display='none'
+let formButton = document.querySelector('.form-button')
+
+function showFormListener(){
+
+    formButton.addEventListener('click', event => {
+        if (event.target.dataset.id === 'login'){
+            document.getElementById('id01').style.display='block'
+        } else if (event.target.dataset.id === 'signup'){
+            document.getElementById('id02').style.display='block'
+        }
+    })
+}
+
+
+const formListener = () => {
+    const form = document.querySelector('form')
+    form.addEventListener('submit', function(e){
+        debugger
+        if (e.target.id === "login form") {
+            const newLogin = {
+                username: e.target.firstElementChild.children[1].value,
+                password_digest: e.target.firstElementChild.children[3].value
+            }
+        }
+    })
+
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+main()
+
+
+
+
+
+
+
