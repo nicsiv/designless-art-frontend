@@ -1,8 +1,5 @@
-
-
 let userId = 1
-let polySynth
-
+let userIndex = 1
 let width = this.innerWidth
 let height = this.innerHeight * .80
 
@@ -12,6 +9,92 @@ function setup() {
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
 
+    createButtons()
+}
+
+function draw() {
+    console.log('mouseposition:' + mouseX + ',' + mouseY);
+    background(12, 12);
+    
+    stroke(255);
+    if (mouseIsPressed) {
+      line(mouseX, mouseY, pmouseX, pmouseY);
+    }
+    // if (mousePressed){
+    //     shapeShift()
+    // }
+}
+
+function shapeShift(){
+    color = map(mouseY, 0, 300, 0, 255);
+  
+    if(mouseX < 100) {
+      noStroke();
+      fill(color);
+
+      a = Math.ceil(random(width))
+      b = Math.ceil(random(height))
+      c = Math.ceil(random(50))
+
+      ellipse(a, b, c, c);
+    }
+    
+    if(mouseX >= 100 && mouseX <= 200) {
+      noStroke();
+      fill(color);
+      a = random(width)
+      b = random(height)
+      c = Math.ceil(Math.random(50))
+      d = Math.ceil(Math.random(50))
+
+      rect(a, b, c, d);
+    }
+    
+    if(mouseX > 200) {
+      noStroke();
+      fill(color);
+      a = random(width)
+      b = random(height)
+      c = random(width)
+      d = random(height)
+      e = random(width) 
+      f = random(height)
+
+      triangle(a, b, c, d, e, f); 
+    } 
+
+    if (mousePressed){
+        loop()
+    }
+}
+
+function saveThisCanvas(){
+    let newCanvasName = `${userId}/${++userIndex}`
+    saveCanvas(newCanvasName, 'png')
+    let newCanvas = {canvas: newCanvasName}
+
+    reqObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCanvas)
+    }
+    addCanvasToApi(reqObj)
+}
+
+function addCanvasToApi(reqObj){
+    fetch(`http://localhost:3000/${userId}`, reqObj)
+    .then(resp => resp.json())
+    .then(canvas => {
+        console.log(canvas)
+        debugger
+    })
+
+
+}
+
+function createButtons(){
     saveBtn = createButton("Save Canvas"); 
     saveBtn.position(5, 250) 
     saveBtn.mousePressed(saveThisCanvas); 
@@ -29,75 +112,11 @@ function setup() {
 
     triangleBtn = createButton('Triangle')
     triangleBtn.position(5, 450)
-    triangleBtn.mousePressed(shapeOf('triangle'))
+    // triangleBtn.mousePressed(shapeOf('triangle'))
 
     rectangleBtn = createButton('Rectangle')
     rectangleBtn.position(5, 500)
-    rectangleBtn.mousePressed(shapeOf('rectangle'))
-}
-
-function draw() {
-    console.log('mouseposition:' + mouseX + ',' + mouseY);
-    background(12, 12);
-     
-    shapeOf(shape)
-
-}
-
-function saveThisCanvas(){
-    let newCanvasName = `${userId}/8++`
-    saveCanvas(newCanvasName, 'png')
-    let newCanvas = {canvas: newCanvasName}
-
-    reqObj = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newCanvas)
-    }
-
-    addCanvasToApi(reqObj)
-
-}
-
-function addCanvasToApi(reqObj){
-    fetch(`http://localhost:3000/${userId}`, reqObj)
-    .then(resp => resp.json())
-    .then(canvas => {
-        console.log(canvas)
-    })
-}
-
-function shapeOf(shape){
-
-    
-    r = random(255); // r is a random number between 0 - 255
-    g = random(100,200); // g is a random number betwen 100 - 200
-    b = random(100); // b is a random number between 0 - 100
-    a = random(200,255); // a is a random number between 200 - 255
-    
-    fill(r, g, b, a);
-
-    if (shape === 'rectangle'){
-        let e = Math.ceil(Math.random() * 100)
-        let f = Math.ceil(Math.random() * 100)
-        let x = Math.ceil(random(width))
-        let y = Math.ceil(random(height))
-
-        rect(x, y, e, f) 
-
-    } else if (shape == 'triangle'){
-        let c = Math.ceil(Math.random() * 100)
-        let d = Math.ceil(Math.random() * 100)
-        let e = Math.ceil(Math.random() * 100)
-        let f = Math.ceil(Math.random() * 100)
-        let g = Math.ceil(Math.random() * 100)
-        let h = Math.ceil(Math.random() * 100)
-        
-        triangle(c, d, e, f, g, h)
-    }
-
+    // rectangleBtn.mousePressed(shapeOf('rectangle'))
 
 }
 
