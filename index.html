@@ -19,56 +19,47 @@
 </head>
   
 <body>
-
-  <header class="grid-header">  
-    <nav class="col-8-middle right">
-      <!-- <a href="/#yourcanvases"> YOUR CANVASES </a> -->
-      <div class="dropdown">
-        <button class="dropbtn">YOUR CANVASES</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
+    <header class="grid-header">  
+      <nav class="col-8-middle right">
+        <!-- <a href="/#yourcanvases"> YOUR CANVASES </a> -->
+        <div class="dropdown">
+          <button class="dropbtn" id = 'canvas-button'>YOUR CANVASES</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#">Link 1</a>
+            </div>
+        </div>
+    
+              <!-- <a href="/#log-in">LOG  IN</a> -->
+          <button class = 'dropdown' id = 'form-button'>LOG IN / SIGNUP</button>
+            <div id="loginForm" class="dropdown-content">
+              <form class = 'login'>
+                  <input type="text" placeholder="Enter Username" name="uname" required>
+                  <button type="submit">Login</button>
+              </form>
+            </div>
           </div>
-      </div>
-            <a href="/#about">ABOUT</a>
-            <!-- <a href="/#log-in">LOG  IN</a> -->
-            <a class = 'form-button' data-id = 'login' onclick="document.getElementById('id01').style.display='block'">LOG IN / SIGNUP</a>
-
-            <!-- The Modal 1 -->
-            <div id="id01" class="modal">
-              <span onclick="document.getElementById('id01').style.display='none'"class="close" title="Close Modal">&times;</span>
-                  <!-- Modal Content -->
-                  <form class="modal-content animate" id = "login form" >
-
-                    <div class="container">
-                      <label for="uname"><b>Username</b></label>
-                      <input type="text" placeholder="Enter Username" name="uname" required>
-                      <button type="submit">Login</button>
-                    </div>
-                      <div class="container" style="background-color:#f1f1f1"></div>
-                  </form>
-            </div>
-      </div>
-    </nav>      
-  </header>
+        </div>
+      </nav>      
+    </header>
           
-            <div id="col-1">
-              <h5>This is half of a page</h5>
-              <nav class="w3-sidenav w3-white" style="width:25%">
-                <a href="#">Color</a>
-                <br>
-                <a href="#">Shape</a>
-                <br>
-                <a href="#">Speed</a>
-                <br>
-                <a href="#">Options</a>
-              </nav>
+  <div id="col-1">
+    <!-- <h5>This is half of a page</h5> -->
+    <!-- <nav class="w3-sidenav w3-white" style="width:25%">
+      <a href="#">Color</a>
+      <br>
+      <a href="#">Shape</a>
+      <br>
+      <a href="#">Speed</a>
+      <br>
+      <a href="#">Options</a>
+    </nav> -->
             
-              
-            </div>
-            <div id="col-2">
-              <h5>This is another half of a page</h5>
-              <script src="sketch.js"></script>
-            </div>
+        
+      </div>
+      <div id="col-2">
+        <h5>This is another half of a page</h5>
+        <script src="sketch.js"></script>
+      </div>
     </body>
 </html>
 

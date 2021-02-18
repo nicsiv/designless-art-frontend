@@ -149,7 +149,7 @@ header.grid-header {
   float: left;
   height: 100%;
   background-color: #FFEFD5;
-  z-index: 1010101010
+  z-index: 1010101011
 }
 
 #col-2 {
@@ -199,6 +199,14 @@ header.grid-header {
     text-decoration: none;
     display: block;
   }
+
+  form {
+    cursor: pointer;
+    display: inline-block;
+    position: inherit;
+    background-color: #f1f1f1;
+    min-width: 160px;
+  }
   
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #ddd}
@@ -244,9 +252,7 @@ header.grid-header {
   } */
 
 
-  /* login form */
-  
-  {box-sizing: border-box;}
+
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
