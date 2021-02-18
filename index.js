@@ -52,7 +52,6 @@ const formListener = () => {
     })
 }
 
-<<<<<<< HEAD
 
 let div = document.querySelector('#col-1')
 const saveButton = document.createElement('button')
@@ -80,27 +79,6 @@ saveButton.addEventListener('click', event => {
 })
 
 
-=======
-let dropdownDisplay = false
-const dropDown = document.querySelector('#myDropdown')
-dropDown.style.display = 'none'
-const button = document.querySelector('.dropbtn')
-button.addEventListener('click', event => {
-	dropdownDisplay = !dropdownDisplay
-       if (dropdownDisplay) {
-		dropDown.style.display = 'block'	
-	} else {
-		dropDown.style.display = 'none'
-	}
-})
-
-function saveEasel(){
-let saveEaselBtn = document.querySelectorAll('button')[2]
-saveEaselBtn.addEventListener('click', event => {
-    console.log(event.target)
-})
-}
->>>>>>> 5f15c8d9bb17aba87f6aa6158bb738818f50cb4b
 
 
 main()
