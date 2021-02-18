@@ -2,36 +2,29 @@ let dropdownDisplay = false
 const dropDown = document.querySelector('#myDropdown')
 dropDown.style.display = 'none'
 
-const main = () => {
+let loginDisplay = false
+const login = document.querySelector('#loginForm')
+login.style.display = 'none'
 
-    showFormListener()
+//when user signs in change to none
+let canvasesDisplay = false
+const canvaseButton = document.querySelector('#canvas-button')
+canvaseButton.style.display = 'none'
+
+const main = () => {
     formListener()
     saveEasel()
     createButtonListener()
 }
 
-document.getElementById('id01').style.display='none'
-// document.getElementById('id02').style.display='none'
-let formButton = document.querySelector('.form-button')
-
-function showFormListener(){
-
-    formButton.addEventListener('click', event => {
-        if (event.target.dataset.id === 'login'){
-            document.getElementById('id01').style.display='block'
-        } else if (event.target.dataset.id === 'signup'){
-            document.getElementById('id02').style.display='block'
-        }
-    })
-}
-
 const formListener = () => {
     const form = document.querySelector('form')
     form.addEventListener('submit', function(e){
-        if (e.target.id === "login form") {
+        
+        if (e.target.className === "login") {
             e.preventDefault()
             const newLogin = {
-                username: e.target.firstElementChild.children[1].value,
+                username: e.target.firstElementChild.value,
             }
             e.target.reset()
 
@@ -45,11 +38,42 @@ const formListener = () => {
 
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
-                .then(users => {
-                    console.log(users)
+                .then(user => {
+                    login.style.display = 'none'
+                    loginAuth(user)
                 })     
         }
     })
+}
+
+function loginAuth(user){
+    if (user){
+        
+        // add canvases
+        //display name
+        let h5 = document.querySelector('h5')
+        h5.innerText = user.username
+        canvaseButton.style.display = 'block'
+        let button = document.querySelector('#form-button')
+        button.innerText = 'LOGOUT'
+        
+    }
+}
+
+function editUsername(){
+
+}
+
+function deleteUsername(){
+
+}
+
+function logout(){
+
+}
+
+function deleteEasel(){
+    
 }
 
 
@@ -76,7 +100,8 @@ saveButton.addEventListener('click', event => {
         
         newEasel = {
             image: url,
-            user_id: userId
+            user_id: userId,
+            photo: 'x'
         }
         let reqObj = {
             method: 'POST',
@@ -88,11 +113,11 @@ saveButton.addEventListener('click', event => {
         fetch('http://localhost:3000/easels/image', reqObj)
         .then(resp => resp.json())
         .then(data => {
+            // debugger
             console.log(data)
         })
     })
 })
-
 
 
 

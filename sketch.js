@@ -99,25 +99,24 @@ function addCanvasToApi(reqObj){
         
     })
 }
-
-function saveAsJSON() { 
-    let exampleObj = [ 
-      { 
-        name: "Samuel", 
-        age: 23, 
-      }, 
-      { 
-        name: "Axel", 
-        age: 15, 
-      }, 
-    ]; 
-    save(exampleObj, "output_text.json"); 
-  } 
+// function saveAsJSON() { 
+//     let exampleObj = [ 
+//       { 
+//         name: "Samuel", 
+//         age: 23, 
+//       }, 
+//       { 
+//         name: "Axel", 
+//         age: 15, 
+//       }, 
+//     ]; 
+//     save(exampleObj, "output_text.json"); 
+//   } 
 
 function createButtons(){
     saveBtn = createButton("Save Canvas"); 
     saveBtn.position(5, 650) 
-    saveBtn.mousePressed(saveAsJSON);
+    saveBtn.mousePressed(saveThisCanvas);
      
 
     // btn = createButton("Change Shape"); 
