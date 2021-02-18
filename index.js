@@ -2,14 +2,17 @@ let dropdownDisplay = false
 const dropDown = document.querySelector('#myDropdown')
 dropDown.style.display = 'none'
 
+let loginButton = document.querySelector('#form-button')
+loginButton.style.display = 'block'
+
 let loginDisplay = false
 const login = document.querySelector('#loginForm')
 login.style.display = 'none'
 
 //when user signs in change to none
 let canvasesDisplay = false
-const canvaseButton = document.querySelector('#canvas-button')
-canvaseButton.style.display = 'none'
+const canvasButton = document.querySelector('#canvas-button')
+canvasButton.style.display = 'none'
 
 const main = () => {
     formListener()
@@ -48,17 +51,33 @@ const formListener = () => {
 
 function loginAuth(user){
     if (user){
-        
         // add canvases
-        //display name
+
         let h5 = document.querySelector('h5')
         h5.innerText = user.username
-        canvaseButton.style.display = 'block'
-        let button = document.querySelector('#form-button')
+        canvasButton.style.display = 'block'
+        let div = document.querySelector('#form-button').parentElement
+        let button = document.createElement('button')
+        button.id = 'logout'
         button.innerText = 'LOGOUT'
+        div.append(button)
+        let loginButton = document.querySelector('#form-button')
+        loginButton.style.display = 'none'
+
+
+        //create canvas
+        let col = document.querySelector('#col-2')
+        let easel = document.createElement('canvas')
+        easel.id = 'newCanvas'
         
+        
+
+
+
+        // col.innerHTML = `<script src='sketch.js'></script>`
     }
 }
+
 
 function editUsername(){
 
@@ -68,7 +87,17 @@ function deleteUsername(){
 
 }
 
-function logout(){
+function logout(){ 
+    loginButton.style.display = 'block'
+    canvasButton.style.display = 'none'
+    let button = document.querySelector('button#logout')
+    button.remove()
+    let h5 = document.querySelector('h5')
+    h5.innerText = ''
+    debugger
+}
+
+function logoutListener(){
 
 }
 
