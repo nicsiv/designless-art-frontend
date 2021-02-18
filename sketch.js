@@ -3,6 +3,8 @@ let userIndex = 1
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 
+
+
 function setup() {
     frameRate(5)
     
@@ -99,19 +101,7 @@ function addCanvasToApi(reqObj){
         
     })
 }
-// function saveAsJSON() { 
-//     let exampleObj = [ 
-//       { 
-//         name: "Samuel", 
-//         age: 23, 
-//       }, 
-//       { 
-//         name: "Axel", 
-//         age: 15, 
-//       }, 
-//     ]; 
-//     save(exampleObj, "output_text.json"); 
-//   } 
+
 
 function createButtons(){
     saveBtn = createButton("Save Canvas"); 
