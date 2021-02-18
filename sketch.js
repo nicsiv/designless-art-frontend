@@ -1,28 +1,38 @@
 let userId = 1
 let userIndex = 1
-let width = this.innerWidth
-let height = this.innerHeight
+let width = this.innerWidth *.9
+let height = this.innerHeight *.7
 
 function setup() {
-    frameRate(1)
+    frameRate(5)
     
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
-
+    background(1)
     createButtons()
 }
 
 function draw() {
-    console.log('mouseposition:' + mouseX + ',' + mouseY);
-    background(0);
     
-    stroke(255);
-    if (mouseIsPressed) {
-      line(mouseX, mouseY, pmouseX, pmouseY);
+    
+    if (mouseIsPressed){
+      e = mouseX
+      f = mouseY
     }
-    // if (mousePressed){
-    //     shapeShift()
-    // }
+      
+    let e = Math.ceil(Math.random() * 100)
+    let f = Math.ceil(Math.random() * 100)
+    let x = Math.ceil(random(width))
+    let y = Math.ceil(random(height))
+    
+      r = random(255); // r is a random number between 0 - 255
+      g = random(100,200); // g is a random number betwen 100 - 200
+      b = random(100); // b is a random number between 0 - 100
+      a = random(200,255); // a is a random number between 200 - 255
+      
+      fill(r, g, b, a);
+      rect(x, y, e, f)  
+
 }
 
 function shapeShift(){
@@ -97,27 +107,27 @@ function addCanvasToApi(reqObj){
 
 function createButtons(){
     saveBtn = createButton("Save Canvas"); 
-    saveBtn.position(5, 250) 
+    saveBtn.position(5, 950) 
     saveBtn.mousePressed(saveThisCanvas);
      
 
-    btn = createButton("Change Shape"); 
-    btn.position(5, 300) 
+    // btn = createButton("Change Shape"); 
+    // btn.position(5, 300) 
     
     stopBtn = createButton("Stop"); 
-    stopBtn.position(5, 350) 
+    stopBtn.position(5, 900) 
     stopBtn.mousePressed(noLoop); 
     
     resumeBtn = createButton("Resume");
-    resumeBtn.position(5, 400) 
+    resumeBtn.position(5, 850) 
     resumeBtn.mousePressed(loop); 
 
-    triangleBtn = createButton('Triangle')
-    triangleBtn.position(5, 450)
+    // triangleBtn = createButton('Triangle')
+    // triangleBtn.position(5, 450)
     // triangleBtn.mousePressed(shapeOf('triangle'))
 
-    rectangleBtn = createButton('Rectangle')
-    rectangleBtn.position(5, 500)
+    // rectangleBtn = createButton('Rectangle')
+    // rectangleBtn.position(5, 500)
     // rectangleBtn.mousePressed(shapeOf('rectangle'))
 }
 

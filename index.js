@@ -1,11 +1,14 @@
+let dropdownDisplay = false
+const dropDown = document.querySelector('#myDropdown')
+dropDown.style.display = 'none'
 
 const main = () => {
+
     showFormListener()
     formListener()
     saveEasel()
+    createButtonListener()
 }
-
-
 
 document.getElementById('id01').style.display='none'
 // document.getElementById('id02').style.display='none'
@@ -29,9 +32,8 @@ const formListener = () => {
             e.preventDefault()
             const newLogin = {
                 username: e.target.firstElementChild.children[1].value,
-                // password_digest: e.target.firstElementChild.children[3].value 
             }
-            event.target.reset()
+            e.target.reset()
 
             const reqObj = {
                 method: 'POST',
@@ -44,22 +46,36 @@ const formListener = () => {
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
                 .then(users => {
-                    //   users.forEach(user => {
-                          console.log(users)
-                          
-                      })     
+                    console.log(users)
+                })     
         }
     })
 }
 
 
+//create function
 let div = document.querySelector('#col-1')
 const saveButton = document.createElement('button')
 saveButton.className = 'save'
 saveButton.innerText = 'save'
 div.append(saveButton)
+
+//create function/listener
 saveButton.addEventListener('click', event => {
-    let easel = window.canvas.toDataURL('image/jpeg')
+    canvas.toBlob(function(blob) {
+        let newImg = document.createElement('img'),
+            url = URL.createObjectURL(blob);
+      
+        newImg.onload = function() {
+          URL.revokeObjectURL(url);
+        };
+      
+        newImg.src = url;
+        let div = document.querySelector('#myDropdown')
+        div.appendChild(newImg);
+        debugger
+      })
+
     newEasel = {
         image: easel,
         user_id: userId,
@@ -71,7 +87,7 @@ saveButton.addEventListener('click', event => {
         },
         body: JSON.stringify(newEasel)
     }
-    fetch('http://localhost:3000/easels', reqObj)
+    fetch('http://localhost:3000/easels/image', reqObj)
     .then(resp => resp.json())
     .then(data => {
         console.log(data)
