@@ -14,11 +14,6 @@ function setup() {
 
 function draw() {
     
-    
-    if (mouseIsPressed){
-      e = mouseX
-      f = mouseY
-    }
       
     let e = Math.ceil(Math.random() * 100)
     let f = Math.ceil(Math.random() * 100)
@@ -101,25 +96,39 @@ function addCanvasToApi(reqObj){
     .then(resp => resp.json())
     .then(canvas => {
         console.log(canvas)
-        debugger
+        
     })
 }
 
+function saveAsJSON() { 
+    let exampleObj = [ 
+      { 
+        name: "Samuel", 
+        age: 23, 
+      }, 
+      { 
+        name: "Axel", 
+        age: 15, 
+      }, 
+    ]; 
+    save(exampleObj, "output_text.json"); 
+  } 
+
 function createButtons(){
     saveBtn = createButton("Save Canvas"); 
-    saveBtn.position(5, 950) 
-    saveBtn.mousePressed(saveThisCanvas);
+    saveBtn.position(5, 650) 
+    saveBtn.mousePressed(saveAsJSON);
      
 
     // btn = createButton("Change Shape"); 
     // btn.position(5, 300) 
     
     stopBtn = createButton("Stop"); 
-    stopBtn.position(5, 900) 
+    stopBtn.position(5, 700) 
     stopBtn.mousePressed(noLoop); 
     
     resumeBtn = createButton("Resume");
-    resumeBtn.position(5, 850) 
+    resumeBtn.position(5, 750) 
     resumeBtn.mousePressed(loop); 
 
     // triangleBtn = createButton('Triangle')
