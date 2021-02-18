@@ -23,7 +23,7 @@ const main = () => {
 const formListener = () => {
     const form = document.querySelector('form')
     form.addEventListener('submit', function(e){
-        
+    
         if (e.target.className === "login") {
             e.preventDefault()
             const newLogin = {
