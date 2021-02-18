@@ -67,30 +67,29 @@ saveButton.addEventListener('click', event => {
             url = URL.createObjectURL(blob);
       
         newImg.onload = function() {
-          URL.revokeObjectURL(url);
+        //   URL.revokeObjectURL(url);
         };
       
         newImg.src = url;
         let div = document.querySelector('#myDropdown')
         div.appendChild(newImg);
-        debugger
-      })
-
-    newEasel = {
-        image: easel,
-        user_id: userId,
-    }
-    let reqObj = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newEasel)
-    }
-    fetch('http://localhost:3000/easels/image', reqObj)
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data)
+        
+        newEasel = {
+            image: url,
+            user_id: userId
+        }
+        let reqObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newEasel)
+        }
+        fetch('http://localhost:3000/easels/image', reqObj)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+        })
     })
 })
 
