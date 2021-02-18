@@ -3,8 +3,6 @@ let userIndex = 1
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 
-
-
 function setup() {
     frameRate(5)
     
@@ -12,6 +10,7 @@ function setup() {
     cnv.parent('#col-2')
     background(1)
     createButtons()
+    saveListener()
 }
 
 function draw() {
@@ -30,6 +29,14 @@ function draw() {
       fill(r, g, b, a);
       rect(x, y, e, f)  
 
+      
+}
+
+function saveListener(){
+    let saveButton = document.querySelector('.save')
+    saveButton.addEventListener('click', event => {
+        noLoop()
+    })
 }
 
 function shapeShift(){

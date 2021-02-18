@@ -21,9 +21,11 @@ const main = () => {
 }
 
 const formListener = () => {
+    
     const form = document.querySelector('form')
+    
     form.addEventListener('submit', function(e){
-        
+    
         if (e.target.className === "login") {
             e.preventDefault()
             const newLogin = {
@@ -66,15 +68,10 @@ function loginAuth(user){
 
 
         //create canvas
-        let col = document.querySelector('#col-2')
-        let easel = document.createElement('canvas')
-        easel.id = 'newCanvas'
+        // let col = document.querySelector('#col-2')
+        // let easel = document.createElement('canvas')
+        // easel.id = 'newCanvas'
         
-        
-
-
-
-        // col.innerHTML = `<script src='sketch.js'></script>`
     }
 }
 
@@ -94,7 +91,7 @@ function logout(){
     button.remove()
     let h5 = document.querySelector('h5')
     h5.innerText = ''
-    debugger
+    
 }
 
 function logoutListener(){
@@ -104,7 +101,6 @@ function logoutListener(){
 function deleteEasel(){
     
 }
-
 
 //create function
 let div = document.querySelector('#col-1')
@@ -125,8 +121,16 @@ saveButton.addEventListener('click', event => {
       
         newImg.src = url;
         let div = document.querySelector('#myDropdown')
-        div.appendChild(newImg);
-        
+        let button = document.createElement('button')
+        let newDiv = document.createElement('div')
+        button.id = 'delete'
+        button.innerText = 'delete'
+        newDiv.append(button, newImg)
+        div.appendChild(newDiv);
+        button.addEventListener('click', event => {
+            deleteCanvas(event)
+        })
+
         newEasel = {
             image: url,
             user_id: userId,
@@ -167,9 +171,24 @@ function createButtonListener(){
             }
         } else if (event.target.innerText === 'LOGOUT'){
             logout()
+        } else if (event.target.nodeName === 'IMG'){
+            debugger
         }
 
     })
+}
+
+function saveListener(){
+    let saveButton = document.querySelector('.save')
+    saveButton.addEventListener('click', event => {
+        noLoop()
+        debugger
+        `touch /${newfilexxx}`
+    })
+}
+
+function deleteCanvas(event){
+    event.target.parentElement.remove() 
 }
 
 function saveEasel(){
