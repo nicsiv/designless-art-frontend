@@ -32,12 +32,7 @@ function draw() {
       
 }
 
-function saveListener(){
-    let saveButton = document.querySelector('.save')
-    saveButton.addEventListener('click', event => {
-        noLoop()
-    })
-}
+
 
 function shapeShift(){
     color = map(mouseY, 0, 300, 0, 255);
