@@ -3,8 +3,6 @@ let userIndex = 1
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 
-
-
 function setup() {
     frameRate(5)
     
@@ -12,6 +10,7 @@ function setup() {
     cnv.parent('#col-2')
     background(1)
     createButtons()
+    saveListener()
 }
 
 function draw() {
@@ -30,7 +29,10 @@ function draw() {
       fill(r, g, b, a);
       rect(x, y, e, f)  
 
+      
 }
+
+
 
 function shapeShift(){
     color = map(mouseY, 0, 300, 0, 255);
