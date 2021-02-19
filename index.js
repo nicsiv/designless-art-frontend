@@ -15,7 +15,6 @@ canvasButton.style.display = 'none'
 
 const main = () => {
     formListener()
-    saveEasel()
     createButtonListener()
 }
 
@@ -40,6 +39,7 @@ const formListener = () => {
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
                 .then(user => {
+                    
                     login.style.display = 'none'
                     loginAuth(user)
                     populateEasels(user)
@@ -48,10 +48,14 @@ const formListener = () => {
     })
 }
 
-
 function populateEasels(user){
     let div = document.querySelector('div#myDropdown')
-    debugger
+    
+    user.easels.forEach(easel => {
+        let img = document.createElement('img')
+        img.src = easel.image
+        div.appendChild(img)        
+    })
 
 }
 
@@ -172,12 +176,7 @@ function deleteCanvas(event){
     event.target.parentElement.remove() 
 }
 
-function saveEasel(){
-let saveEaselBtn = document.querySelectorAll('button')[2]
-saveEaselBtn.addEventListener('click', event => {
-    console.log(event.target)
-})
-}
+
 
 main()
 
