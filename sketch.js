@@ -9,7 +9,7 @@ let slider
 
 
 function setup() {
-    frameRate(20)
+    frameRate(200)
     angleMode(DEGREES)
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
@@ -53,11 +53,40 @@ function draw() {
     if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
       kalleidoscope()
     }
-    }
+
+    //a
+    if (keyIsDown(65)){
+      let x=0;
+      let y=0;
+      let side= 50;
+      let offset = 100;
+      let r = 0;
+      
+      for (let a=0; a<10; a++){
+      for(let b=0; b<5;b++){
+      fill (250,(70*b),0);
+      noStroke();
+    	r = random(0, 50);
+     side=random(0,100);
+       if (mouseIsPressed)
+        rect(x+offset*b,y+offset*a,side,side);
+      else
+      ellipse(x+offset*b+r,y+offset*a+r,side,side);
+     
+      }
+    } 
   }
+      
+  }
+}
+
+  
 
 function kalleidoscope(){
   stroke(255)
+  if (keyIsDown(SHIFT)){
+    stroke(random(255), random(255), random(255))
+  }
       
   let mx = mouseX - width / 2;
   let my = mouseY - height / 2;
@@ -77,16 +106,18 @@ function kalleidoscope(){
 }
 
 function freeDraw(){
+  
   stroke(0, 0, 0);
   line(mouseX, mouseY, pmouseX, pmouseY);
   drawx = random(-5, 5) + mouseX;
   drawy = random(-5, 5) + mouseY;
-
+  let sw = sizeSlider.value();
+  strokeWeight(sw);
+  
   stroke(255)
   if (keyIsDown(SHIFT)){
     stroke(random(255), random(255), random(255))
   }
-
 
   line(drawx, drawy, px, py);
 
