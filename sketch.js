@@ -1,7 +1,7 @@
 
 let start = false
-let width = this.innerWidth *.9
-let height = this.innerHeight *.7
+let width = this.innerWidth
+let height = this.innerHeight *.8
 
 let drawx, drawy;
 let px, py;
@@ -127,8 +127,6 @@ function noises(){
     line(x, mouseY+noiseVal*80, x, height);
   }
 }
-
-
 
 function saveThisCanvas(){
     let newCanvasName = `${userId}/${++userIndex}`
