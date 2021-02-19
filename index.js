@@ -1,3 +1,5 @@
+let userID
+
 let dropdownDisplay = false
 const dropDown = document.querySelector('#myDropdown')
 dropDown.style.display = 'none'
@@ -10,14 +12,17 @@ login.style.display = 'none'
 let canvasesDisplay = false
 const canvasButton = document.querySelector('#canvas-button')
 canvasButton.style.display = 'none'
+
 const main = () => {
     formListener()
-    saveEasel()
     createButtonListener()
 }
+
 const formListener = () => {
-    const form = document.querySelector('form')
+    
+    const form = document.querySelector('form')   
     form.addEventListener('submit', function(e){
+
         if (e.target.className === "login") {
             e.preventDefault()
             const newLogin = {
@@ -34,15 +39,30 @@ const formListener = () => {
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
                 .then(user => {
+                    
                     login.style.display = 'none'
                     loginAuth(user)
+                    populateEasels(user)
                 })     
         }
     })
 }
+
+function populateEasels(user){
+    let div = document.querySelector('div#myDropdown')
+    
+    user.easels.forEach(easel => {
+        let img = document.createElement('img')
+        img.src = easel.image
+        div.appendChild(img)        
+    })
+
+}
+
 function loginAuth(user){
     if (user){
         // add canvases
+        userID = user.id
         let h5 = document.querySelector('h5')
         h5.innerText = user.username
         canvasButton.style.display = 'block'
@@ -59,6 +79,7 @@ function loginAuth(user){
         // easel.id = 'newCanvas'
     }
 }
+
 function editUsername(){
 }
 function deleteUsername(){
@@ -70,11 +91,10 @@ function logout(){
     button.remove()
     let h5 = document.querySelector('h5')
     h5.innerText = ''
+
 }
-function logoutListener(){
-}
-function deleteEasel(){
-}
+
+
 //create function
 let div = document.querySelector('#col-1')
 const saveButton = document.createElement('button')
@@ -82,35 +102,44 @@ saveButton.className = 'save'
 saveButton.innerText = 'save'
 div.append(saveButton)
 //create function/listener
+
 saveButton.addEventListener('click', event => {
-    canvas.toBlob(function(blob) {
-        let newImg = document.createElement('img'),
-            url = URL.createObjectURL(blob);
-        newImg.onload = function() {
-        //   URL.revokeObjectURL(url);
-        };
-        newImg.src = url;
-        let div = document.querySelector('#myDropdown')
-        div.appendChild(newImg);
-        newEasel = {
-            image: url,
-            user_id: userId,
-            photo: 'x'
-        }
-        let reqObj = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newEasel)
-        }
-        fetch('http://localhost:3000/easels/image', reqObj)
-        .then(resp => resp.json())
-        .then(data => {
-            // debugger
-            console.log(data)
-        })
+    let newEasel = {}
+    let context = canvas.getContext('2d')
+    let img = canvas.toDataURL('image/png')
+    localStorage.setItem("canvas", img)
+    let newImg = document.createElement('img')
+    
+    newEasel = {
+        image: img,
+        user_id: userID
+    }
+    let reqObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newEasel)
+    }
+    fetch('http://localhost:3000/easels', reqObj)
+    .then(resp => resp.json())
+    .then(data => {
+
+        console.log(data)
     })
+
+        newImg.src = img;
+        let div = document.querySelector('#myDropdown')
+        let button = document.createElement('button')
+        let newDiv = document.createElement('div')
+        button.id = 'delete'
+        button.innerText = 'delete'
+        newDiv.append(button, newImg)
+        div.appendChild(newDiv);
+        button.addEventListener('click', event => {
+            deleteCanvas(event)
+        })
+        
 })
 function createButtonListener(){    
     document.addEventListener('click', event => {
@@ -130,15 +159,25 @@ function createButtonListener(){
             }
         } else if (event.target.innerText === 'LOGOUT'){
             logout()
+        } else if (event.target.nodeName === 'IMG'){
+            
         }
     })
 }
-function saveEasel(){
-let saveEaselBtn = document.querySelectorAll('button')[2]
-saveEaselBtn.addEventListener('click', event => {
-    console.log(event.target)
-})
+
+function saveListener(){
+    let saveButton = document.querySelector('.save')
+    saveButton.addEventListener('click', event => {
+        noLoop()
+    })
 }
+
+function deleteCanvas(event){
+    event.target.parentElement.remove() 
+}
+
+
+
 main()
 
 
