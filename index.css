@@ -25,8 +25,13 @@
   }
 
   html {
+
+    background-image: url('images/27.svg');
+    background-size: cover;
+    background-color: white;
     scroll-behavior: smooth; /* this enables smooth scrolling between internal links */
   }
+
 
   img {
     max-width: 100%; /* this ensures images never break their container */
@@ -68,11 +73,10 @@
   }
 
   .logo {
-    font-family: 'Anton';
-    font-size: 23px;
-    color: black;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 17px;
     display: inline;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   h2  { font-size: 3.2rem;  }
@@ -209,6 +213,18 @@ header.grid-header {
     background-color: #F5DEB3;
     min-width: 160px;
   }
+  
+
+  
+  /* .hero {
+    background-image: url('images/07.svg');
+    background-size: cover;
+    background-color: #FAF0E6;
+    padding: 44px;
+    margin-right: 40px;
+    margin-left: 40px;
+  } */
+ 
   
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #F5DEB3}

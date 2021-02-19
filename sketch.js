@@ -2,18 +2,29 @@
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 
+let drawx, drawy;
+let px, py;
+
+
+
 function setup() {
     frameRate(5)
     
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
+
+    drawx = width / 2;
+    drawy = height / 2;
+    px = drawx;
+    py = drawy;
     background(1)
     createButtons()
+    strokeWeight(3);
     saveListener()
 }
 
 function draw() {
-    
+    let showNorm = false;
       
     let e = Math.ceil(Math.random() * 100)
     let f = Math.ceil(Math.random() * 100)
@@ -27,10 +38,41 @@ function draw() {
       
       fill(r, g, b, a);
       rect(x, y, e, f)  
+ //
+ 
+      if (keyIsPressed) {
+        showNorm = !showNorm;
+      }
+    
+    //   drawx = random(-5, 5) + mouseX;
+    //   drawy = random(-5, 5) + mouseY;
+    
+    //   stroke(255);
+    //   line(drawx, drawy, px, py);
+    
+    //   px = drawx;
+    //   py = drawy;
+    
+    
+      if (showNorm) {
+        stroke(0, 0, 0);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        drawx = random(-5, 5) + mouseX;
+        drawy = random(-5, 5) + mouseY;
+    
+        stroke(255);
+        line(drawx, drawy, px, py);
+    
+        px = drawx;
+        py = drawy;
+      }
+    
+    }
+
+
+
 
       
-}
-
 
 
 function shapeShift(){
@@ -120,6 +162,10 @@ function createButtons(){
     resumeBtn = createButton("Resume");
     resumeBtn.position(5, 750) 
     resumeBtn.mousePressed(loop); 
+
+    // drawBtn = createButton("Draw");
+    // drawBtn.position(5, 600) 
+    // drawBtn.mousePressed(clear); 
 
     // triangleBtn = createButton('Triangle')
     // triangleBtn.position(5, 450)
