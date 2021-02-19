@@ -180,11 +180,15 @@ function createButtonListener(){
 
 function editProfile(event){
     
-    event.target.innerHTML = `              
+    let button = event.target
+    let div = document.createElement('div')
+    div.id = 'edit-form-div'
+    div.innerHTML = `              
         <form class = 'edit-form'>
             <input type="text" placeholder="New Username" name="uname" required>
             <button type="submit">Submit</button>
         </form>`
+    button.append(div)
     let editForm = document.querySelector('.edit-form')
     editForm.addEventListener('submit', event => {
         event.preventDefault()
@@ -198,8 +202,9 @@ function editProfile(event){
                 username: username
             })
         }
+        
         editFetch(reqObj)
-        editForm.style.display = 'none'
+        event.target.parentElement.remove()
     })
 
 }
