@@ -96,15 +96,7 @@ function logout(){
     canvasButton.style.display = 'none'
 }
 
-//create function
-let div = document.querySelector('#col-1')
-const saveButton = document.createElement('button')
-saveButton.className = 'save'
-saveButton.innerText = 'save'
-div.append(saveButton)
-//create function/listener
-
-saveButton.addEventListener('click', event => {
+function saveACanvas(){
     let newEasel = {}
     let context = canvas.getContext('2d')
     let img = canvas.toDataURL('image/png')
@@ -126,14 +118,13 @@ saveButton.addEventListener('click', event => {
         addImage(easel)
     })
 
-    
-})
+}
+
 
 function populateEasels(user){
     let div = document.querySelector('div#myDropdown')
     
     user.easels.forEach(easel => {
-        
         addImage(easel)      
     })
 
@@ -189,11 +180,15 @@ function createButtonListener(){
 
 function editProfile(event){
     
-    event.target.innerHTML = `              
+    let button = event.target
+    let div = document.createElement('div')
+    div.id = 'edit-form-div'
+    div.innerHTML = `              
         <form class = 'edit-form'>
             <input type="text" placeholder="New Username" name="uname" required>
             <button type="submit">Submit</button>
         </form>`
+    button.append(div)
     let editForm = document.querySelector('.edit-form')
     editForm.addEventListener('submit', event => {
         event.preventDefault()
@@ -203,27 +198,27 @@ function editProfile(event){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
+            body: JSON.stringify({
                 username: username
-            }
+            })
         }
+        
         editFetch(reqObj)
-        editForm.remove()
+        event.target.parentElement.remove()
     })
 
 }
 
 function editFetch(reqObj){
+    
     fetch(`http://localhost:3000/users/${userID}`, reqObj)
-}
-
-
-function saveListener(){
-    let saveButton = document.querySelector('.save')
-    saveButton.addEventListener('click', event => {
-        noLoop()
+    .then(resp => resp.json())
+    .then(user => {
+        let button = document.querySelector('button#canvas-button')
+        button.innerText = `${user.username.toUpperCase()}'S CANVASES`
     })
 }
+
 
 function deleteCanvas(event){
     

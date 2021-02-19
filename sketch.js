@@ -20,7 +20,6 @@ function setup() {
     background(1)
     createButtons()
     strokeWeight(3);
-    saveListener()
 }
 
 function draw() {
@@ -68,7 +67,7 @@ function draw() {
         py = drawy;
       }
     }
-    
+
     
     }
 
@@ -156,8 +155,22 @@ function createButtons(){
     stopBtn.mousePressed(noLoop); 
     
     resumeBtn = createButton("Resume");
-    resumeBtn.position(1, 223) 
+    resumeBtn.position(1, 225) 
     resumeBtn.mousePressed(loop); 
+
+    clearBtn = createButton("Clear");
+    clearBtn.position(1, 275) 
+    clearBtn.mousePressed(e => {
+      clear()
+      background(1)
+    }); 
+
+    saveBtn = createButton("Save");
+    saveBtn.position(1, 325) 
+    saveBtn.mousePressed(e => {
+      noLoop()
+      saveACanvas()
+    }); 
 }
 
 
