@@ -158,8 +158,12 @@ function createButtons(){
     resumeBtn.position(1, 225) 
     resumeBtn.mousePressed(loop); 
 
+    clearBtn = createButton("Clear");
+    clearBtn.position(1, 275) 
+    clearBtn.mousePressed(clear); 
+
     saveBtn = createButton("Save");
-    saveBtn.position(1, 275) 
+    saveBtn.position(1, 325) 
     saveBtn.mousePressed(e => {
       noLoop()
       saveACanvas()
