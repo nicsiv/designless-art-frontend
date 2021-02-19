@@ -94,6 +94,9 @@ function logout(){
     div.replaceChildren()
     loginButton.style.display = 'block'
     canvasButton.style.display = 'none'
+    noLoop()
+    clear()
+    background(1)
 }
 
 function saveACanvas(){
@@ -127,7 +130,6 @@ function populateEasels(user){
     user.easels.forEach(easel => {
         addImage(easel)      
     })
-
 }
 
 function addImage(easel){
