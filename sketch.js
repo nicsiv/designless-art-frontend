@@ -1,5 +1,4 @@
-let userId = 1
-let userIndex = 1
+
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 

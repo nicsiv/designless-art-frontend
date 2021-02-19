@@ -1,4 +1,4 @@
-
+let userID
 
 let dropdownDisplay = false
 const dropDown = document.querySelector('#myDropdown')
@@ -12,16 +12,15 @@ login.style.display = 'none'
 let canvasesDisplay = false
 const canvasButton = document.querySelector('#canvas-button')
 canvasButton.style.display = 'none'
+
 const main = () => {
     formListener()
-    saveEasel()
     createButtonListener()
-    
 }
+
 const formListener = () => {
     
-    const form = document.querySelector('form')
-    
+    const form = document.querySelector('form')   
     form.addEventListener('submit', function(e){
 
         if (e.target.className === "login") {
@@ -40,15 +39,30 @@ const formListener = () => {
                 fetch('http://localhost:3000/users/auth', reqObj)
                 .then(resp => resp.json())
                 .then(user => {
+                    
                     login.style.display = 'none'
                     loginAuth(user)
+                    populateEasels(user)
                 })     
         }
     })
 }
+
+function populateEasels(user){
+    let div = document.querySelector('div#myDropdown')
+    
+    user.easels.forEach(easel => {
+        let img = document.createElement('img')
+        img.src = easel.image
+        div.appendChild(img)        
+    })
+
+}
+
 function loginAuth(user){
     if (user){
         // add canvases
+        userID = user.id
         let h5 = document.querySelector('h5')
         h5.innerText = user.username
         canvasButton.style.display = 'block'
@@ -63,9 +77,9 @@ function loginAuth(user){
         // let col = document.querySelector('#col-2')
         // let easel = document.createElement('canvas')
         // easel.id = 'newCanvas'
-
     }
 }
+
 function editUsername(){
 }
 function deleteUsername(){
@@ -98,7 +112,7 @@ saveButton.addEventListener('click', event => {
     
     newEasel = {
         image: img,
-        user_id: userId
+        user_id: userID
     }
     let reqObj = {
         method: 'POST',
@@ -110,7 +124,7 @@ saveButton.addEventListener('click', event => {
     fetch('http://localhost:3000/easels', reqObj)
     .then(resp => resp.json())
     .then(data => {
-        
+
         console.log(data)
     })
 
@@ -162,12 +176,7 @@ function deleteCanvas(event){
     event.target.parentElement.remove() 
 }
 
-function saveEasel(){
-let saveEaselBtn = document.querySelectorAll('button')[2]
-saveEaselBtn.addEventListener('click', event => {
-    console.log(event.target)
-})
-}
+
 
 main()
 
