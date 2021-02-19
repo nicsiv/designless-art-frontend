@@ -5,11 +5,12 @@ let height = this.innerHeight *.7
 
 let drawx, drawy;
 let px, py;
+let slider
 
 
 function setup() {
-    frameRate(50)
-    
+    frameRate(20)
+    angleMode(DEGREES)
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
 
@@ -20,105 +21,114 @@ function setup() {
     background(1)
     createButtons()
     strokeWeight(3);
+    sizeSlider = createSlider(1, 32, 4, 0.1)
 }
+let symmetry = 6;   
+let angle = 360 / symmetry;
+
 
 function draw() {
   if (start){
     let showNorm = false;
-      
-    let e = Math.ceil(Math.random() * 100)
-    let f = Math.ceil(Math.random() * 100)
-    let x = Math.ceil(random(width))
-    let y = Math.ceil(random(height))
-    
-      r = random(255); // r is a random number between 0 - 255
-      g = random(100,200); // g is a random number betwen 100 - 200
-      b = random(100); // b is a random number between 0 - 100
-      a = random(200,255); // a is a random number between 200 - 255
-      
-      fill(r, g, b, a);
-      rect(x, y, e, f)  
- //
+
+    if (keyIsDown(DOWN_ARROW)){ 
+      rectangles()
+    }
  
-      if (keyIsPressed) {
-        showNorm = !showNorm;
+ 
+    if (keyIsDown(LEFT_ARROW)) {
+      freeDraw()
       }
     
-    //   drawx = random(-5, 5) + mouseX;
-    //   drawy = random(-5, 5) + mouseY;
-    
-    //   stroke(255);
-    //   line(drawx, drawy, px, py);
-    
-    //   px = drawx;
-    //   py = drawy;
-    
-    
-      if (showNorm) {
-        stroke(0, 0, 0);
-        line(mouseX, mouseY, pmouseX, pmouseY);
-        drawx = random(-5, 5) + mouseX;
-        drawy = random(-5, 5) + mouseY;
-    
-        stroke(255);
-        line(drawx, drawy, px, py);
-    
-        px = drawx;
-        py = drawy;
-      }
+    if(keyIsDown(UP_ARROW)){
+      noises()
     }
 
-    
+    if(keyIsDown(RIGHT_ARROW)){
+      variableEllipse(mouseX, mouseY, pmouseX, pmouseY);
     }
 
+    translate(width / 2, height / 2);
+    
+    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+      kalleidoscope()
+    }
+    }
+  }
 
-
-
+function kalleidoscope(){
+  stroke(255)
       
+  let mx = mouseX - width / 2;
+  let my = mouseY - height / 2;
+  let pmx = pmouseX - width / 2;
+  let pmy = pmouseY - height / 2;
 
-
-function shapeShift(){
-    color = map(mouseY, 0, 300, 0, 255);
-  
-    if(mouseX < 100) {
-      noStroke();
-      fill(color);
-
-      a = Math.ceil(random(width))
-      b = Math.ceil(random(height))
-      c = Math.ceil(random(50))
-
-      ellipse(a, b, c, c);
-    }
-    
-    if(mouseX >= 100 && mouseX <= 200) {
-      noStroke();
-      fill(color);
-      a = random(width)
-      b = random(height)
-      c = Math.ceil(Math.random(50))
-      d = Math.ceil(Math.random(50))
-
-      rect(a, b, c, d);
-    }
-    
-    if(mouseX > 200) {
-      noStroke();
-      fill(color);
-      a = random(width)
-      b = random(height)
-      c = random(width)
-      d = random(height)
-      e = random(width) 
-      f = random(height)
-
-      triangle(a, b, c, d, e, f); 
-    } 
-
-    if (mousePressed){
-        loop()
+    if(mouseIsPressed) for (let i = 0; i < symmetry; i++) {
+      rotate(angle);
+      let sw = sizeSlider.value();
+      strokeWeight(sw);
+      line(mx, my, pmx, pmy);
+      push();
+      scale(1, -1);
+      line(mx, my, pmx, pmy);
+      pop();
     }
 }
+
+function freeDraw(){
+  stroke(0, 0, 0);
+  line(mouseX, mouseY, pmouseX, pmouseY);
+  drawx = random(-5, 5) + mouseX;
+  drawy = random(-5, 5) + mouseY;
+
+  stroke(255)
+  if (keyIsDown(SHIFT)){
+    stroke(random(255), random(255), random(255))
+  }
+
+
+  line(drawx, drawy, px, py);
+
+  px = drawx;
+  py = drawy;
+}
+
+function variableEllipse(x, y, px, py) {
+  let speed = abs(x - px) + abs(y - py);
+  stroke(speed);
+  ellipse(x, y, speed, speed);
+}
+
+function rectangles(){
+  let e = Math.ceil(Math.random() * 100)
+  let f = Math.ceil(Math.random() * 100)
+  let x = Math.ceil(random(width))
+  let y = Math.ceil(random(height))
+  
+    r = random(255); // r is a random number between 0 - 255
+    g = random(100,200); // g is a random number betwen 100 - 200
+    b = random(100); // b is a random number between 0 - 100
+    a = random(200,255); // a is a random number between 200 - 255
+    
+    fill(r, g, b, a);
+    rect(x, y, e, f)  
+}
+
+let noiseScale=0.02;
+
+function noises(){
+  
+  for (let x=0; x < width; x++) {
+    let noiseVal = noise((mouseX+x)*noiseScale, mouseY*noiseScale);
+    
+    let color = (mouseX)
+    stroke(noiseVal*250);
+    line(x, mouseY+noiseVal*80, x, height);
+  }
+}
+
+
 
 function saveThisCanvas(){
     let newCanvasName = `${userId}/${++userIndex}`
@@ -142,8 +152,7 @@ function addCanvasToApi(reqObj){
     fetch('http://localhost:3000/easels', reqObj)
     .then(resp => resp.json())
     .then(canvas => {
-        console.log(canvas)
-        
+        console.log(canvas)  
     })
 }
 
@@ -168,7 +177,7 @@ function createButtons(){
     saveBtn = createButton("Save");
     saveBtn.position(1, 325) 
     saveBtn.mousePressed(e => {
-      noLoop()
+      
       saveACanvas()
     }); 
 }
