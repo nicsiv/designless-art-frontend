@@ -1,14 +1,17 @@
 let userID
 
 let dropdownDisplay = false
+
 const dropDown = document.querySelector('#myDropdown')
 dropDown.style.display = 'none'
+
 let loginButton = document.querySelector('#form-button')
 loginButton.style.display = 'block'
+
 let loginDisplay = false
 const login = document.querySelector('#loginForm')
 login.style.display = 'none'
-//when user signs in change to none
+
 let canvasesDisplay = false
 const canvasButton = document.querySelector('#canvas-button')
 canvasButton.style.display = 'none'
@@ -48,52 +51,39 @@ const formListener = () => {
     })
 }
 
-function populateEasels(user){
-    let div = document.querySelector('div#myDropdown')
-    
-    user.easels.forEach(easel => {
-        let img = document.createElement('img')
-        img.src = easel.image
-        div.appendChild(img)        
-    })
-
-}
-
 function loginAuth(user){
     if (user){
-        // add canvases
         userID = user.id
+        canvasButton.style.display = 'block'
+        debugger
+        
         let h5 = document.querySelector('h5')
         h5.innerText = user.username
-        canvasButton.style.display = 'block'
+        
         let div = document.querySelector('#form-button').parentElement
-        let button = document.createElement('button')
-        button.id = 'logout'
-        button.innerText = 'LOGOUT'
-        div.append(button)
+        div.innerHTML += `<button id = 'logout'>LOGOUT</button>`
+        div.innerHTML += `<button id = 'edit'>EDIT PROFILE</button>`
+        div.innerHTML += `<button id = 'delete'>DELETE PROFILE</button>`
+        
         let loginButton = document.querySelector('#form-button')
         loginButton.style.display = 'none'
-        //create canvas
-        // let col = document.querySelector('#col-2')
-        // let easel = document.createElement('canvas')
-        // easel.id = 'newCanvas'
     }
 }
 
-function editUsername(){
-}
-function deleteUsername(){
-}
 function logout(){ 
-    loginButton.style.display = 'block'
-    canvasButton.style.display = 'none'
     let button = document.querySelector('button#logout')
     button.remove()
+    let button2 = document.querySelector('button#edit')
+    button2.remove()
+    let button3 = document.querySelector('button#delete')
+    button3.remove()
     let h5 = document.querySelector('h5')
     h5.innerText = ''
-
+    let div = document.querySelector('div#myDropdown')
+    div.replaceChildren()
+    loginButton.style.display = 'block'
+    canvasButton.style.display = 'none'
 }
-
 
 //create function
 let div = document.querySelector('#col-1')
@@ -107,8 +97,6 @@ saveButton.addEventListener('click', event => {
     let newEasel = {}
     let context = canvas.getContext('2d')
     let img = canvas.toDataURL('image/png')
-    localStorage.setItem("canvas", img)
-    let newImg = document.createElement('img')
     
     newEasel = {
         image: img,
@@ -123,24 +111,40 @@ saveButton.addEventListener('click', event => {
     }
     fetch('http://localhost:3000/easels', reqObj)
     .then(resp => resp.json())
-    .then(data => {
-
-        console.log(data)
+    .then(easel => {
+        addImage(easel)
     })
 
-        newImg.src = img;
-        let div = document.querySelector('#myDropdown')
-        let button = document.createElement('button')
-        let newDiv = document.createElement('div')
-        button.id = 'delete'
-        button.innerText = 'delete'
-        newDiv.append(button, newImg)
-        div.appendChild(newDiv);
-        button.addEventListener('click', event => {
-            deleteCanvas(event)
-        })
-        
+    
 })
+
+function populateEasels(user){
+    let div = document.querySelector('div#myDropdown')
+    
+    user.easels.forEach(easel => {
+        
+        addImage(easel)      
+    })
+
+}
+
+function addImage(easel){
+    
+    let newImg = document.createElement('img')
+    newImg.src = easel.image;
+    let div = document.querySelector('#myDropdown')
+    let button = document.createElement('button')
+    let newDiv = document.createElement('div')
+    newDiv.dataset.id = easel.id
+    button.id = 'delete'
+    button.innerText = 'delete'
+    newDiv.append(button, newImg)
+    div.appendChild(newDiv);
+    button.addEventListener('click', event => {
+        deleteCanvas(event)
+    })
+}
+
 function createButtonListener(){    
     document.addEventListener('click', event => {
         if (event.target.id === 'canvas-button'){
@@ -161,7 +165,16 @@ function createButtonListener(){
             logout()
         } else if (event.target.nodeName === 'IMG'){
             
+        } else if (event.target.id === 'edit'){
+
+        } else if (event.target.id === 'delete'){
+            fetch(`http://localhost:3000/users/${userID}`, {method: 'DELETE'})
+            .then(resp => resp.json())
+            .then(data => {
+
+            })
         }
+
     })
 }
 
@@ -173,9 +186,14 @@ function saveListener(){
 }
 
 function deleteCanvas(event){
-    event.target.parentElement.remove() 
+    
+    event.target.parentElement.remove()
+    id = parseInt(event.target.parentElement.dataset.id)
+    fetch(`http://localhost:3000/easels/${id}`, {method: 'DELETE',})
+    .then(resp => resp.json())
+    .then(data => {
+    })
 }
-
 
 
 main()

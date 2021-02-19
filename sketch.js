@@ -105,14 +105,7 @@ function addCanvasToApi(reqObj){
 
 
 function createButtons(){
-    saveBtn = createButton("Save Canvas"); 
-    saveBtn.position(5, 650) 
-    saveBtn.mousePressed(saveThisCanvas);
-     
 
-    // btn = createButton("Change Shape"); 
-    // btn.position(5, 300) 
-    
     stopBtn = createButton("Stop"); 
     stopBtn.position(5, 700) 
     stopBtn.mousePressed(noLoop); 
@@ -121,13 +114,6 @@ function createButtons(){
     resumeBtn.position(5, 750) 
     resumeBtn.mousePressed(loop); 
 
-    // triangleBtn = createButton('Triangle')
-    // triangleBtn.position(5, 450)
-    // triangleBtn.mousePressed(shapeOf('triangle'))
-
-    // rectangleBtn = createButton('Rectangle')
-    // rectangleBtn.position(5, 500)
-    // rectangleBtn.mousePressed(shapeOf('rectangle'))
 }
 
 
