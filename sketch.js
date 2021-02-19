@@ -149,11 +149,11 @@ function addCanvasToApi(reqObj){
 function createButtons(){
 
     stopBtn = createButton("Stop"); 
-    stopBtn.position(5, 700) 
+    stopBtn.position(1, 175) 
     stopBtn.mousePressed(noLoop); 
     
     resumeBtn = createButton("Resume");
-    resumeBtn.position(5, 750) 
+    resumeBtn.position(1, 223) 
     resumeBtn.mousePressed(loop); 
 }
 

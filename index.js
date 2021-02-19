@@ -55,15 +55,29 @@ function loginAuth(user){
     if (user){
         userID = user.id
         canvasButton.style.display = 'block'
-        debugger
         
-        let h5 = document.querySelector('h5')
-        h5.innerText = user.username
+        
+        let button = document.querySelector('button#canvas-button')
+        button.innerText = `${user.username.toUpperCase()}'S CANVASES`
         
         let div = document.querySelector('#form-button').parentElement
-        div.innerHTML += `<button id = 'logout'>LOGOUT</button>`
-        div.innerHTML += `<button id = 'edit'>EDIT PROFILE</button>`
-        div.innerHTML += `<button id = 'delete'>DELETE PROFILE</button>`
+        let buttonDiv = document.createElement('div')
+        buttonDiv.id = 'button-div'
+        
+        let logoutButton = document.createElement('button')
+        logoutButton.id = 'logout'
+        logoutButton.innerText = 'LOGOUT'
+
+        let editButton = document.createElement('button')
+        editButton.id = 'edit'
+        editButton.innerText = 'EDIT'
+        
+        let deleteButton = document.createElement('button')
+        deleteButton.id = 'delete'
+        deleteButton.innerText = 'DELETE'
+
+        buttonDiv.append(logoutButton, editButton, deleteButton)
+        div.append(buttonDiv)
         
         let loginButton = document.querySelector('#form-button')
         loginButton.style.display = 'none'
@@ -71,12 +85,8 @@ function loginAuth(user){
 }
 
 function logout(){ 
-    let button = document.querySelector('button#logout')
-    button.remove()
-    let button2 = document.querySelector('button#edit')
-    button2.remove()
-    let button3 = document.querySelector('button#delete')
-    button3.remove()
+    let buttonDiv = document.querySelector('#button-div')
+    buttonDiv.remove()
     let h5 = document.querySelector('h5')
     h5.innerText = ''
     let div = document.querySelector('div#myDropdown')
@@ -195,14 +205,4 @@ function deleteCanvas(event){
     })
 }
 
-
 main()
-
-
-
-
-
-
-
-
-
