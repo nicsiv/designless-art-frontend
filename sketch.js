@@ -160,7 +160,10 @@ function createButtons(){
 
     clearBtn = createButton("Clear");
     clearBtn.position(1, 275) 
-    clearBtn.mousePressed(clear); 
+    clearBtn.mousePressed(e => {
+      clear()
+      background(1)
+    }); 
 
     saveBtn = createButton("Save");
     saveBtn.position(1, 325) 

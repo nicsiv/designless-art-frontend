@@ -194,18 +194,24 @@ function editProfile(event){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
+            body: JSON.stringify({
                 username: username
-            }
+            })
         }
         editFetch(reqObj)
-        editForm.remove()
+        editForm.style.display = 'none'
     })
 
 }
 
 function editFetch(reqObj){
+    
     fetch(`http://localhost:3000/users/${userID}`, reqObj)
+    .then(resp => resp.json())
+    .then(user => {
+        let button = document.querySelector('button#canvas-button')
+        button.innerText = `${user.username.toUpperCase()}'S CANVASES`
+    })
 }
 
 
