@@ -96,15 +96,7 @@ function logout(){
     canvasButton.style.display = 'none'
 }
 
-//create function
-let div = document.querySelector('#col-1')
-const saveButton = document.createElement('button')
-saveButton.className = 'save'
-saveButton.innerText = 'save'
-div.append(saveButton)
-//create function/listener
-
-saveButton.addEventListener('click', event => {
+function saveACanvas(){
     let newEasel = {}
     let context = canvas.getContext('2d')
     let img = canvas.toDataURL('image/png')
@@ -126,14 +118,13 @@ saveButton.addEventListener('click', event => {
         addImage(easel)
     })
 
-    
-})
+}
+
 
 function populateEasels(user){
     let div = document.querySelector('div#myDropdown')
     
     user.easels.forEach(easel => {
-        
         addImage(easel)      
     })
 
@@ -217,13 +208,6 @@ function editFetch(reqObj){
     fetch(`http://localhost:3000/users/${userID}`, reqObj)
 }
 
-
-function saveListener(){
-    let saveButton = document.querySelector('.save')
-    saveButton.addEventListener('click', event => {
-        noLoop()
-    })
-}
 
 function deleteCanvas(event){
     
