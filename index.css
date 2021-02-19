@@ -63,20 +63,31 @@
     color: black;
     font-family: 'Quicksand', sans-serif;
   }
+
   h3 {
     color: white;
     font-family: 'Abril Fatface', cursive;
   }
+
+  h5 {
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 17px;
+    display: inline;
+    background-color: black;
+    
+  }
+
   .names {
-    color: #F5DEB3
-    ;
+    color: #F5DEB3;
   }
 
   .logo {
     font-family: 'Quicksand', sans-serif;
     font-size: 17px;
     display: inline;
-    font-weight: 600;
+    font-weight: 1000;
+    background-color: #799979
   }
 
   h2  { font-size: 3.2rem;  }
