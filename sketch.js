@@ -1,4 +1,5 @@
 
+let start = false
 let width = this.innerWidth *.9
 let height = this.innerHeight *.7
 
@@ -6,9 +7,8 @@ let drawx, drawy;
 let px, py;
 
 
-
 function setup() {
-    frameRate(5)
+    frameRate(50)
     
     let cnv = createCanvas(width, height)
     cnv.parent('#col-2')
@@ -24,6 +24,7 @@ function setup() {
 }
 
 function draw() {
+  if (start){
     let showNorm = false;
       
     let e = Math.ceil(Math.random() * 100)
@@ -66,6 +67,8 @@ function draw() {
         px = drawx;
         py = drawy;
       }
+    }
+    
     
     }
 

@@ -73,7 +73,7 @@ function loginAuth(user){
         editButton.innerText = 'EDIT'
         
         let deleteButton = document.createElement('button')
-        deleteButton.id = 'delete'
+        deleteButton.id = 'delete-user'
         deleteButton.innerText = 'DELETE'
 
         buttonDiv.append(logoutButton, editButton, deleteButton)
@@ -81,6 +81,7 @@ function loginAuth(user){
         
         let loginButton = document.querySelector('#form-button')
         loginButton.style.display = 'none'
+        start = true
     }
 }
 
@@ -176,17 +177,46 @@ function createButtonListener(){
         } else if (event.target.nodeName === 'IMG'){
             
         } else if (event.target.id === 'edit'){
-
-        } else if (event.target.id === 'delete'){
+            editProfile(event)
+        } else if (event.target.id === 'delete-user'){
             fetch(`http://localhost:3000/users/${userID}`, {method: 'DELETE'})
             .then(resp => resp.json())
-            .then(data => {
-
-            })
+            logout()
         }
 
     })
 }
+
+function editProfile(event){
+    
+    event.target.innerHTML = `              
+        <form class = 'edit-form'>
+            <input type="text" placeholder="New Username" name="uname" required>
+            <button type="submit">Submit</button>
+        </form>`
+    let editForm = document.querySelector('.edit-form')
+    editForm.addEventListener('submit', event => {
+        event.preventDefault()
+        let username = event.target.firstElementChild.value
+        let reqObj = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: {
+                username: username
+            }
+        }
+        editFetch(reqObj)
+        editForm.remove()
+    })
+
+}
+
+function editFetch(reqObj){
+    fetch(`http://localhost:3000/users/${userID}`, reqObj)
+}
+
 
 function saveListener(){
     let saveButton = document.querySelector('.save')
@@ -202,6 +232,7 @@ function deleteCanvas(event){
     fetch(`http://localhost:3000/easels/${id}`, {method: 'DELETE',})
     .then(resp => resp.json())
     .then(data => {
+
     })
 }
 
